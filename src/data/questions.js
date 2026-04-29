@@ -1,0 +1,67 @@
+export const questions = [
+  {
+    id: "role",
+    title: "현재 나의 역할과 가장 가까운 것은?",
+    subtitle: "역할에 따라 추천 과정의 방향이 달라집니다.",
+    options: [
+      { label: "신입사원 또는 1~3년 차 주니어", tags: ["self"], role: "junior" },
+      { label: "주임/대리급 실무 리더", tags: ["influence"], role: "associate" },
+      { label: "과장/차장급 중간 리더", tags: ["work", "influence"], role: "middle" },
+      { label: "팀장/파트장/보직 리더", tags: ["work", "people", "change"], role: "teamlead" },
+      { label: "임원 또는 차세대 경영 리더", tags: ["future", "change"], role: "executive" },
+      { label: "현장관리자 또는 현장관리 후보자", tags: ["work", "influence"], role: "field" },
+    ],
+  },
+  {
+    id: "challenge",
+    title: "요즘 가장 크게 느끼는 리더십 과제는?",
+    subtitle: "현재 고민을 기준으로 핵심 역량을 진단합니다.",
+    options: [
+      { label: "스스로 업무를 주도하고 성장 방향을 잡고 싶다", tags: ["self"] },
+      { label: "실무 전문성을 바탕으로 영향력을 더 넓히고 싶다", tags: ["influence"] },
+      { label: "팀 목표를 성과로 연결하고 실행력을 높이고 싶다", tags: ["work"] },
+      { label: "변화 상황에서 조직을 설득하고 방향을 제시하고 싶다", tags: ["change"] },
+      { label: "구성원과 더 잘 소통하고 신뢰를 만들고 싶다", tags: ["people"] },
+      { label: "AI·데이터·디지털 변화에 맞춰 리더십을 전환하고 싶다", tags: ["future"] },
+    ],
+  },
+  {
+    id: "skill",
+    title: "가장 강화하고 싶은 역량은?",
+    subtitle: "선택한 역량에 맞춰 추천 프로그램이 달라집니다.",
+    options: [
+      { label: "셀프리더십 / 자기관리 / 회복탄력성", tags: ["self"] },
+      { label: "실무 조율 / 설득 / 팔로워십 / 협업 영향력", tags: ["influence"] },
+      { label: "성과관리 / 목표관리 / 실행관리", tags: ["work"] },
+      { label: "전략적 사고 / 변화관리 / 조직 설계", tags: ["change"] },
+      { label: "코칭 / 피드백 / 공감소통 / 갈등관리", tags: ["people"] },
+      { label: "AI 활용 / 데이터 기반 의사결정 / 미래 리더십", tags: ["future"] },
+    ],
+  },
+  {
+    id: "situation",
+    title: "가장 자주 마주하는 상황은?",
+    subtitle: "실제 현업 장면을 기준으로 과정 적합도를 높입니다.",
+    options: [
+      { label: "새로운 역할로 전환하면서 기대 역할이 커졌다", tags: ["self"] },
+      { label: "부서·동료·선후배와 연결되며 실무 영향력을 넓혀야 한다", tags: ["influence"] },
+      { label: "성과 목표는 분명한데 실행 관리가 어렵다", tags: ["work"] },
+      { label: "변화 과제를 추진하며 조직을 설득해야 한다", tags: ["change"] },
+      { label: "팀원의 동기부여, 소통, 갈등 조정이 중요하다", tags: ["people"] },
+      { label: "AI와 디지털 기술을 업무와 리더십에 접목해야 한다", tags: ["future"] },
+    ],
+  },
+  {
+    id: "learning",
+    title: "선호하는 학습 방식은?",
+    subtitle: "운영 형태 추천에 반영됩니다.",
+    options: [
+      { label: "짧고 임팩트 있는 특강", tags: ["short"] },
+      { label: "실습과 토론 중심의 워크숍", tags: ["workshop"] },
+      { label: "사례 분석과 액션플랜 수립", tags: ["action"] },
+      { label: "진단과 피드백이 포함된 과정", tags: ["diagnosis"] },
+      { label: "1:1 코칭 또는 맞춤형 컨설팅", tags: ["coaching"] },
+      { label: "온라인·오프라인 혼합형 학습 여정", tags: ["journey"] },
+    ],
+  },
+];
