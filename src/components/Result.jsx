@@ -3,6 +3,8 @@ import Icon from "./Icon";
 import ProgramCard from "./ProgramCard";
 import { GOOGLE_FORM_URL } from "../data/constants";
 import { typeMeta } from "../data/typeMeta";
+import { industryMeta } from "../data/industryMeta";
+import { getRecommendedPrograms } from "../lib/recommendations";
 
 const learningMap = {
   short: "1~2시간 특강형",
@@ -17,7 +19,9 @@ export default function Result({ result, onReset }) {
   const meta = typeMeta[result.topTag];
   const second = typeMeta[result.secondTag];
 
-  const programs = meta.programs[result.role] || meta.programs.middle;
+  const industryInfo = industryMeta[result.industry] || industryMeta.mixed;
+  const programs = getRecommendedPrograms(result, 4);
+
   const learningType = learningMap[result.learning] || "참여형 워크숍형";
   const durationType = result.duration || "1일 과정";
   const scoreMax = Math.max(...Object.values(result.scores));
@@ -83,7 +87,7 @@ export default function Result({ result, onReset }) {
             <p className="text-slate-600 leading-8">{meta.description}</p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          <div className="grid sm:grid-cols-3 gap-4 mb-6">
             <div className="rounded-3xl bg-slate-50 p-5 border border-slate-100">
               <p className="text-sm text-slate-500 mb-1">추천 운영 형태</p>
               <p className="font-bold text-slate-900">{learningType}</p>
@@ -102,14 +106,31 @@ export default function Result({ result, onReset }) {
             </div>
           </div>
 
+          <div className="rounded-3xl bg-indigo-50 border border-indigo-100 p-5 mb-8">
+            <p className="text-sm font-semibold text-indigo-500 mb-1">
+              업무 분야 반영 포인트
+            </p>
+            <p className="font-bold text-slate-900 mb-2">
+              {industryInfo.label}
+            </p>
+            <p className="text-sm text-slate-700 leading-7">
+              {industryInfo.focus}
+            </p>
+          </div>
+
           <div>
             <h3 className="text-2xl font-bold text-slate-950 mb-4">
               추천 프로그램
             </h3>
 
+            <p className="text-sm text-slate-500 leading-6 mb-4">
+              결과 유형과 현재 역할을 기준으로 1차 추천하고, 선택한 업무
+              분야에 맞는 과정과 사례를 추가 반영했습니다.
+            </p>
+
             <div className="grid gap-4">
               {programs.map((program, index) => (
-                <ProgramCard key={program} program={program} index={index} />
+                <ProgramCard key={program.title} program={program} index={index} />
               ))}
             </div>
           </div>
@@ -160,8 +181,8 @@ export default function Result({ result, onReset }) {
           </h3>
 
           <p className="text-slate-300 leading-7 mb-6">
-            추천 결과를 바탕으로 대상자, 교육 시간, 핵심 이슈에 맞춘 맞춤형
-            리더십 학습 여정을 제안드릴 수 있습니다.
+            추천 결과를 바탕으로 대상자, 교육 시간, 업무 분야, 핵심 이슈에
+            맞춘 맞춤형 리더십 학습 여정을 제안드릴 수 있습니다.
           </p>
 
           <div className="space-y-3 mb-7 text-sm text-slate-300">
@@ -171,7 +192,7 @@ export default function Result({ result, onReset }) {
             </div>
             <div className="flex gap-2">
               <Icon name="check" className="w-5 h-5 text-white" />
-              테마별 모듈 조합
+              업무 분야별 사례 반영
             </div>
             <div className="flex gap-2">
               <Icon name="check" className="w-5 h-5 text-white" />
