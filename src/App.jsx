@@ -1,3 +1,4 @@
+import { trackEvent } from "./lib/analytics";
 import BrandLogo from "./components/BrandLogo";
 import { useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
