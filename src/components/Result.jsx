@@ -5,6 +5,7 @@ import { GOOGLE_FORM_URL } from "../data/constants";
 import { typeMeta } from "../data/typeMeta";
 import { industryMeta } from "../data/industryMeta";
 import { getRecommendedPrograms } from "../lib/recommendations";
+import { trackEvent } from "../lib/analytics";
 
 const learningMap = {
   short: "1~2시간 특강형",
@@ -130,7 +131,11 @@ export default function Result({ result, onReset }) {
 
             <div className="grid gap-4">
               {programs.map((program, index) => (
-                <ProgramCard key={program.title} program={program} index={index} />
+                <ProgramCard
+                  key={program.title}
+                  program={program}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -204,6 +209,16 @@ export default function Result({ result, onReset }) {
             href={GOOGLE_FORM_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent("curriculum_click", {
+                source: "result_page",
+                result_type: result.topTag,
+                role: result.role,
+                industry: result.industry,
+                learning: result.learning,
+                duration: result.duration,
+              })
+            }
             className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-slate-950 font-bold hover:bg-slate-100 transition"
           >
             교육별 상세 커리큘럼 받기

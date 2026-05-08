@@ -1,4 +1,3 @@
-import { trackEvent } from "./lib/analytics";
 import BrandLogo from "./components/BrandLogo";
 import { useMemo, useState } from "react";
 import { AnimatePresence } from "framer-motion";
@@ -9,6 +8,7 @@ import QuestionCard from "./components/QuestionCard";
 import Result from "./components/Result";
 import { questions } from "./data/questions";
 import { scoreAnswers } from "./lib/scoring";
+import { trackEvent } from "./lib/analytics";
 
 export default function App() {
   const [started, setStarted] = useState(false);
@@ -23,8 +23,29 @@ export default function App() {
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: option }));
   };
 
+  const handleStart = () => {
+    trackEvent("test_start");
+    setStarted(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleNext = () => {
     if (step === questions.length - 1) {
+      trackEvent("test_complete", {
+        result_type: result.topTag,
+        role: result.role,
+        industry: result.industry,
+        learning: result.learning,
+        duration: result.duration,
+      });
+
+      trackEvent(`result_${result.topTag}`, {
+        role: result.role,
+        industry: result.industry,
+        learning: result.learning,
+        duration: result.duration,
+      });
+
       setShowResult(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -73,7 +94,7 @@ export default function App() {
           </div>
         </header>
 
-        {!started && !showResult && <Intro onStart={() => setStarted(true)} />}
+        {!started && !showResult && <Intro onStart={handleStart} />}
 
         {started && !showResult && (
           <div>
